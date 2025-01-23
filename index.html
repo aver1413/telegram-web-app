@@ -10,20 +10,5 @@
 <body>
     <h1>Альянс бот</h1>
     <p id="username">Username: </p>
-    <script>
-        function getUsername() {
-    return Telegram.WebApp.initDataUnverified.user.username;
-}
-
-// Выводим username на экран
-const usernameElement = document.getElementById('username');
-const username = getUsername();
-
-if (username) {
-    usernameElement.textContent += username;
-} else {
-    usernameElement.textContent += "Не удалось получить username.";
-}
-    </script>
 </body>
 </html>
