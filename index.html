@@ -5,10 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Telegram Web App</title>
     <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
-    <script src="/username.js"></script>
 </head>
 <body>
     <h1>Альянс бот</h1>
     <p id="username">Username: </p>
+    <button onclick="sendData()">Send Data to Bot</button>
+
+    <script>
+        // Функция для получения username
+        function getUsername() {
+            if (window.Telegram && Telegram.WebApp) {
+                // Проверяем, доступен ли initDataUnverified
+                if (Telegram.WebApp.initDataUnverified && Telegram.WebApp.initDataUnverified.user) {
+                    return Telegram.WebApp.initDataUnverified.user.username;
+                }
+            }
+            return null;
+        }
+
+        // Выводим username на экран
+        const usernameElement = document.getElementById('username');
+        const username = getUsername();
+
+        if (username) {
+            usernameElement.textContent += username;
+        } else {
+            usernameElement.textContent += "Не удалось получить username.";
+        }
+
+        // Функция для отправки данных в бота
+        function sendData() {
+            const data = { message: "Hello, Bot!" };
+            if (window.Telegram && Telegram.WebApp) {
+                Telegram.WebApp.sendData(JSON.stringify(data));
+                Telegram.WebApp.close();
+            } else {
+                alert("This is not running inside Telegram.");
+            }
+        }
+    </script>
 </body>
 </html>
