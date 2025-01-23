@@ -13,7 +13,7 @@
     <script>
         // Функция для вывода всех данных из initDataUnverified
         function displayData() {
-            const outputElement = document.getElementById('output');
+            let outputElement = document.getElementById('output');
 
             if (window.Telegram && Telegram.WebApp) {
                 // Проверяем, доступен ли initDataUnverified
