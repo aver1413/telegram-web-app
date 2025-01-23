@@ -3,8 +3,8 @@ function getUsername() {
 }
 
 // Выводим username на экран
-const usernameElement = document.getElementById('username');
-const username = getUsername();
+let usernameElement = document.getElementById('username');
+let username = getUsername();
 
 if (username) {
     usernameElement.textContent += username;
