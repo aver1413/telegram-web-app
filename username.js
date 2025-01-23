@@ -4,6 +4,9 @@ function getUsername() {
         if (Telegram.WebApp.initDataUnverified && Telegram.WebApp.initDataUnverified.user) {
             return Telegram.WebApp.initDataUnverified.user.username;
         }
+        else {
+            return null;
+        }
     }
     return null;
 }
