@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Web App</title>
+</head>
+<body>
+    <h1>Hello from GitHub Pages!</h1>
+    <button onclick="sendData()">Send Data to Bot</button>
+
+    <script>
+        function sendData() {
+            const data = { message: "Hello, Bot!" };
+            if (window.Telegram && Telegram.WebApp) {
+                Telegram.WebApp.sendData(JSON.stringify(data));
+                Telegram.WebApp.close();
+            } else {
+                alert("This is not running inside Telegram.");
+            }
+        }
+    </script>
+</body>
+</html>
