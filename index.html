@@ -8,9 +8,40 @@
 </head>
 <body>
     <h1>Альянс бот</h1>
+    <p id="username">Username: </p>
     <button onclick="sendData()">Send Data to Bot</button>
 
     <script>
+        // Функция для получения username из initData
+        function getUsername() {
+            if (window.Telegram && Telegram.WebApp) {
+                // Получаем initData
+                const initData = Telegram.WebApp.initData;
+
+                // Парсим строку initData
+                const params = new URLSearchParams(initData);
+                const user = params.get('user');
+
+                if (user) {
+                    // Парсим JSON-строку user
+                    const userObj = JSON.parse(user);
+                    return userObj.username;
+                }
+            }
+            return null;
+        }
+
+        // Выводим username на экран
+        const usernameElement = document.getElementById('username');
+        const username = getUsername();
+
+        if (username) {
+            usernameElement.textContent += username;
+        } else {
+            usernameElement.textContent += "Не удалось получить username.";
+        }
+
+        // Функция для отправки данных в бота
         function sendData() {
             const data = { message: "Hello, Bot!" };
             if (window.Telegram && Telegram.WebApp) {
