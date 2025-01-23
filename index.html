@@ -8,41 +8,28 @@
 </head>
 <body>
     <h1>Альянс бот</h1>
-    <p id="username">Username: </p>
-    <button onclick="sendData()">Send Data to Bot</button>
+    <p id="output">Данные: </p>
 
     <script>
-        // Функция для получения username
-        function getUsername() {
+        // Функция для вывода всех данных из initDataUnverified
+        function displayData() {
+            const outputElement = document.getElementById('output');
+
             if (window.Telegram && Telegram.WebApp) {
                 // Проверяем, доступен ли initDataUnverified
-                if (Telegram.WebApp.initDataUnverified && Telegram.WebApp.initDataUnverified.user) {
-                    return Telegram.WebApp.initDataUnverified.user.username;
+                if (Telegram.WebApp.initDataUnverified) {
+                    // Выводим все данные из initDataUnverified
+                    outputElement.textContent += JSON.stringify(Telegram.WebApp.initDataUnverified, null, 2);
+                } else {
+                    outputElement.textContent += "initDataUnverified недоступен.";
                 }
-            }
-            return null;
-        }
-
-        // Выводим username на экран
-        const usernameElement = document.getElementById('username');
-        const username = getUsername();
-
-        if (username) {
-            usernameElement.textContent += username;
-        } else {
-            usernameElement.textContent += "Не удалось получить username.";
-        }
-
-        // Функция для отправки данных в бота
-        function sendData() {
-            const data = { message: "Hello, Bot!" };
-            if (window.Telegram && Telegram.WebApp) {
-                Telegram.WebApp.sendData(JSON.stringify(data));
-                Telegram.WebApp.close();
             } else {
-                alert("This is not running inside Telegram.");
+                outputElement.textContent += "Web App не запущен внутри Telegram.";
             }
         }
+
+        // Выводим данные при загрузке страницы
+        displayData();
     </script>
 </body>
 </html>
