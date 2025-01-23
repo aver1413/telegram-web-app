@@ -12,16 +12,11 @@
     <button onclick="sendData()">Send Data to Bot</button>
 
     <script>
-        // Функция для получения username из initData
         function getUsername() {
             if (window.Telegram && Telegram.WebApp) {
-                // Получаем initData
                 const initData = Telegram.WebApp.initData;
-
-                // Парсим строку initData
                 const params = new URLSearchParams(initData);
                 const user = params.get('user');
-
                 if (user) {
                     // Парсим JSON-строку user
                     const userObj = JSON.parse(user);
